@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,7 +19,7 @@ interface Message {
 
 export default function ChatPage() {
   const router = useRouter();
-  const [messages, setMessages] = useState<Message[]>(() => [
+  const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
       content: "Hello! I'm your Ayurvedic health assistant. How can I help you today?",
@@ -32,18 +32,13 @@ export default function ChatPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const isLoggedIn = localStorage.getItem("isLoggedIn");
-      if (!isLoggedIn) {
-        router.push("/login");
-      }
+    if (!localStorage.getItem("isLoggedIn")) {
+      router.push("/login");
     }
   }, [router]);
 
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }, [messages]);
 
   const handleSendMessage = async (e: React.FormEvent) => {
@@ -71,12 +66,15 @@ export default function ChatPage() {
       if (!response.ok) throw new Error("Failed to fetch AI response");
 
       const data = await response.json();
+      console.log("API Response:", data); // Debugging Step
+
+      const assistantMessage = data.reply?.trim() ? data.reply : "I'm sorry, I couldn't process your request. Please try again.";
 
       setMessages((prev) => [
         ...prev,
         {
           id: (Date.now() + 1).toString(),
-          content: data.response || "I'm sorry, I couldn't process your request. Please try again.",
+          content: assistantMessage,
           role: "assistant",
           timestamp: new Date().toISOString(),
         },
@@ -88,6 +86,26 @@ export default function ChatPage() {
     }
   };
 
+  const renderedMessages = useMemo(() =>
+    messages.map((message) => (
+      <div key={message.id} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
+        <div className={`flex gap-3 max-w-[80%] ${message.role === "user" ? "flex-row-reverse" : ""}`}>
+          <Avatar className="h-8 w-8">
+            <AvatarImage src={message.role === "assistant" ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4N_soUiGggkq4TxayU7O_echs7FO8ISMD5w&s" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4N_soUiGggkq4TxayU7O_echs7FO8ISMD5w&s"} alt={message.role} />
+            <AvatarFallback>{message.role === "assistant" ? "AI" : "You"}</AvatarFallback>
+          </Avatar>
+          <div className={`rounded-lg p-3 ${message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>
+            <p>{message.content}</p>
+            <p className="text-xs opacity-70 mt-1">
+              {new Date(message.timestamp).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true })}
+            </p>
+          </div>
+        </div>
+      </div>
+    )),
+    [messages]
+  );
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <DashboardHeader />
@@ -96,60 +114,28 @@ export default function ChatPage() {
           <CardHeader>
             <CardTitle>AI Health Assistant</CardTitle>
           </CardHeader>
-          <CardContent className="flex-1 flex flex-col">
+          <CardContent className="flex-1 flex flex-col" aria-live="polite">
             <ScrollArea className="flex-1 pr-4">
-              <div className="space-y-4">
-                {messages.map((message) => (
-                  <div key={message.id} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
-                    <div className={`flex gap-3 max-w-[80%] ${message.role === "user" ? "flex-row-reverse" : ""}`}>
-                      <Avatar className="h-8 w-8">
-                        {message.role === "assistant" ? (
-                          <>
-                            <AvatarImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4N_soUiGggkq4TxayU7O_echs7FO8ISMD5w&s" alt="AI" />
-                            <AvatarFallback>AI</AvatarFallback>
-                          </>
-                        ) : (
-                          <>
-                            <AvatarImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4N_soUiGggkq4TxayU7O_echs7FO8ISMD5w&s" alt="You" />
-                            <AvatarFallback>You</AvatarFallback>
-                          </>
-                        )}
-                      </Avatar>
-                      <div className={`rounded-lg p-3 ${message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>
-                        <p>{message.content}</p>
-                        <p className="text-xs opacity-70 mt-1">
-                          {new Date(message.timestamp).toLocaleTimeString("en-US", {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                            hour12: true,
-                          })}
-                        </p>
-                      </div>
+              <div className="space-y-4">{renderedMessages}</div>
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div className="flex gap-3 max-w-[80%]">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4N_soUiGggkq4TxayU7O_echs7FO8ISMD5w&s" alt="AI" />
+                      <AvatarFallback>AI</AvatarFallback>
+                    </Avatar>
+                    <div className="rounded-lg p-3 bg-muted">
+                      <p className="animate-pulse">AI is typing...</p>
                     </div>
                   </div>
-                ))}
-                {isLoading && (
-                  <div className="flex justify-start">
-                    <div className="flex gap-3 max-w-[80%]">
-                      <Avatar className="h-8 w-8">
-                        <AvatarImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4N_soUiGggkq4TxayU7O_echs7FO8ISMD5w&s" alt="AI" />
-                        <AvatarFallback>AI</AvatarFallback>
-                      </Avatar>
-                      <div className="rounded-lg p-3 bg-muted">
-                        <p className="animate-pulse">AI is typing...</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                <div ref={messagesEndRef} />
-              </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
             </ScrollArea>
-
             <form onSubmit={handleSendMessage} className="mt-4 flex gap-2">
               <Input placeholder="Type your message..." value={input} onChange={(e) => setInput(e.target.value)} disabled={isLoading} className="flex-1" />
-              <Button type="submit" disabled={isLoading || !input.trim()}>
+              <Button type="submit" disabled={isLoading || !input.trim()} aria-label="Send message">
                 {isLoading ? <div className="h-5 w-5 border-2 border-current border-t-transparent rounded-full animate-spin" /> : <Send className="h-5 w-5" />}
-                <span className="sr-only">Send</span>
               </Button>
             </form>
           </CardContent>
