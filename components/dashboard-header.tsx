@@ -53,9 +53,9 @@ export default function DashboardHeader() {
             <Video className="h-4 w-4" />
             Doctor Consultation
           </Link>
-          <Link href="/health-tracker" className="text-sm font-medium hover:text-primary flex items-center gap-1">
+          <Link href="/chat" className="text-sm font-medium hover:text-primary flex items-center gap-1">
             <Activity className="h-4 w-4" />
-            Health Tracker
+            AI Health Assistant
           </Link>
         </nav>
 

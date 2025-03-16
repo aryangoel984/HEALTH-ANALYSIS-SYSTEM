@@ -475,4 +475,3 @@ export default function LifestylePlan() {
     </div>
   )
 }
-
