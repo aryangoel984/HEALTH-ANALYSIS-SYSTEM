@@ -365,14 +365,7 @@ export default function Dashboard() {
               <User className="h-4 w-4" />
               Update Health Profile
             </Button>
-            <Button
-              variant="outline"
-              className="flex items-center gap-2 hover:bg-primary/10 transition-colors"
-              onClick={() => router.push("/health-tracker")}
-            >
-              <Activity className="h-4 w-4" />
-              Track Health Metrics
-            </Button>
+            
           </div>
         </div>
 
