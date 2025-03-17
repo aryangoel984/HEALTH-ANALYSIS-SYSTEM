@@ -177,6 +177,7 @@ export default function VideoConsultation() {
   }
 
   return (
+    <div className="flex justify-center">
     <div className="min-h-screen bg-background flex flex-col">
       <div className="container py-4">
         <div className="flex items-center justify-between mb-4">
@@ -402,6 +403,7 @@ export default function VideoConsultation() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }

@@ -165,6 +165,130 @@
 //   },
 // ]
 
+// "use client"
+
+// import Link from "next/link"
+// import { useCallback } from "react"
+// import { Button } from "@/components/ui/button"
+// import { ArrowRight } from "lucide-react"
+
+// export default function Home() {
+//   const scrollToFeatures = useCallback(() => {
+//     document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })
+//   }, [])
+
+//   return (
+//     <div className="flex min-h-screen flex-col bg-gray-50 text-gray-900">
+//       {/* Header */}
+//       <header className="sticky top-0 z-50 w-full border-b bg-white/90 backdrop-blur-md shadow-md">
+//         <div className="container flex h-16 items-center justify-between px-6">
+//           {/* Logo */}
+//           <div className="flex items-center gap-2 text-2xl font-extrabold text-primary">
+//             <span className="bg-primary text-white px-2 py-1 rounded-md shadow">Health</span>
+//             <span>Sync</span>
+//           </div>
+
+//           {/* Navigation */}
+//           <nav className="flex items-center gap-6">
+//             <Link href="/login" className="text-sm font-medium hover:underline">
+//               Login
+//             </Link>
+//             <Link href="/register">
+//               <Button className="hover:shadow-lg transition-all">Sign Up</Button>
+//             </Link>
+//           </nav>
+//         </div>
+//       </header>
+
+//       {/* Main Content */}
+//       <main className="flex-1 pt-16">
+//         {/* Hero Section */}
+//         <section className="py-24 md:py-32 bg-gradient-to-b from-white to-gray-100 text-center">
+//           <div className="container flex flex-col items-center">
+//             <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
+//               Your Complete <span className="text-primary">Health</span> Management Platform
+//             </h1>
+//             <p className="mt-6 max-w-2xl text-lg md:text-xl text-gray-600">
+//               Get personalized health insights, AI-powered report analysis, and connect with doctors through live video
+//               consultations.
+//             </p>
+
+//             {/* CTA Buttons */}
+//             <div className="mt-10 flex flex-col sm:flex-row gap-4">
+//               <Link href="/register">
+//                 <Button size="lg" className="gap-2 shadow-md hover:shadow-lg transition-all" aria-label="Get Started">
+//                   Get Started <ArrowRight size={16} />
+//                 </Button>
+//               </Link>
+//               <Button
+//                 size="lg"
+//                 variant="outline"
+//                 onClick={scrollToFeatures}
+//                 className="hover:bg-gray-200 transition-all"
+//                 aria-label="Learn More"
+//               >
+//                 Learn More
+//               </Button>
+//             </div>
+//           </div>
+//         </section>
+
+//         {/* Features Section */}
+//         <section id="features" className="py-20 bg-white">
+//           <div className="container">
+//             <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
+//             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+//               {features.map((feature, index) => (
+//                 <div
+//                   key={index}
+//                   className="flex flex-col items-center text-center p-6 bg-gray-50 rounded-lg shadow-md border border-gray-200 transition-all hover:shadow-lg"
+//                 >
+//                   <div className="h-14 w-14 flex items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
+//                     {feature.icon}
+//                   </div>
+//                   <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+//                   <p className="text-gray-600">{feature.description}</p>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+//         </section>
+//       </main>
+
+//       {/* Footer */}
+//       <footer className="border-t py-8 bg-gray-100">
+//         <div className="container flex flex-col md:flex-row justify-between items-center px-6">
+//           {/* Logo */}
+//           <div className="flex items-center gap-2 text-lg font-semibold">
+//             <span className="bg-primary text-white px-2 py-1 rounded-md">Health</span>
+//             <span>Sync</span>
+//           </div>
+//           <p className="text-sm text-gray-500">© {new Date().getFullYear()} HealthSync. All rights reserved.</p>
+//         </div>
+//       </footer>
+//     </div>
+//   )
+// }
+
+// // Features Data
+// const features = [
+//   {
+//     title: "Health Assessment",
+//     description: "Complete a comprehensive health questionnaire to get personalized insights about your wellbeing.",
+//     icon: <img src="https://www.svgrepo.com/show/260715/checkup.svg" alt="Health Assessment" width={32} height={32} loading="lazy" />,
+//   },
+//   {
+//     title: "AI Report Analysis",
+//     description: "Upload your medical reports and get AI-powered analysis with detailed insights and recommendations.",
+//     icon: <img src="https://cdn1.iconfinder.com/data/icons/artificial-intelligence-in-agriculture-line/128/Artificial_Intelligence_in_Agriculture_-_Line-03-512.png" alt="AI Report Analysis" width={32} height={32} loading="lazy" />,
+//   },
+//   {
+//     title: "Doctor Consultations",
+//     description:
+//       "Connect with specialized doctors through live video consultations and get personalized medical advice.",
+//     icon: <img src="https://uxwing.com/wp-content/themes/uxwing/download/medical-science-lab/online-doctor-consultation-icon.svg" alt="Doctor Consultations" width={32} height={32} loading="lazy" />,
+//   },
+// ]
 "use client"
 
 import Link from "next/link"
@@ -181,10 +305,10 @@ export default function Home() {
     <div className="flex min-h-screen flex-col bg-gray-50 text-gray-900">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-white/90 backdrop-blur-md shadow-md">
-        <div className="container flex h-16 items-center justify-between px-6">
+        <div className="container mx-auto flex h-16 items-center justify-between px-6">
           {/* Logo */}
           <div className="flex items-center gap-2 text-2xl font-extrabold text-primary">
-            <span className="bg-primary text-white px-2 py-1 rounded-md shadow">Health</span>
+            <span className="bg-primary text-white px-3 py-1 rounded-md shadow">Health</span>
             <span>Sync</span>
           </div>
 
@@ -204,7 +328,7 @@ export default function Home() {
       <main className="flex-1 pt-16">
         {/* Hero Section */}
         <section className="py-24 md:py-32 bg-gradient-to-b from-white to-gray-100 text-center">
-          <div className="container flex flex-col items-center">
+          <div className="container mx-auto max-w-4xl flex flex-col items-center">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
               Your Complete <span className="text-primary">Health</span> Management Platform
             </h1>
@@ -234,16 +358,16 @@ export default function Home() {
         </section>
 
         {/* Features Section */}
-        <section id="features" className="py-20 bg-white">
-          <div className="container">
-            <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <section id="features" className="py-20 bg-white text-center">
+          <div className="container mx-auto max-w-5xl">
+            <h2 className="text-3xl font-bold mb-12">How It Works</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               {features.map((feature, index) => (
                 <div
                   key={index}
                   className="flex flex-col items-center text-center p-6 bg-gray-50 rounded-lg shadow-md border border-gray-200 transition-all hover:shadow-lg"
                 >
-                  <div className="h-14 w-14 flex items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
+                  <div className="h-16 w-16 flex items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
                     {feature.icon}
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
@@ -257,10 +381,10 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t py-8 bg-gray-100">
-        <div className="container flex flex-col md:flex-row justify-between items-center px-6">
+        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-6">
           {/* Logo */}
           <div className="flex items-center gap-2 text-lg font-semibold">
-            <span className="bg-primary text-white px-2 py-1 rounded-md">Health</span>
+            <span className="bg-primary text-white px-3 py-1 rounded-md">Health</span>
             <span>Sync</span>
           </div>
           <p className="text-sm text-gray-500">© {new Date().getFullYear()} HealthSync. All rights reserved.</p>
@@ -275,17 +399,17 @@ const features = [
   {
     title: "Health Assessment",
     description: "Complete a comprehensive health questionnaire to get personalized insights about your wellbeing.",
-    icon: <img src="https://www.svgrepo.com/show/260715/checkup.svg" alt="Health Assessment" width={32} height={32} loading="lazy" />,
+    icon: <img src="https://www.svgrepo.com/show/260715/checkup.svg" alt="Health Assessment" width={40} height={40} loading="lazy" />,
   },
   {
     title: "AI Report Analysis",
     description: "Upload your medical reports and get AI-powered analysis with detailed insights and recommendations.",
-    icon: <img src="https://cdn1.iconfinder.com/data/icons/artificial-intelligence-in-agriculture-line/128/Artificial_Intelligence_in_Agriculture_-_Line-03-512.png" alt="AI Report Analysis" width={32} height={32} loading="lazy" />,
+    icon: <img src="https://cdn1.iconfinder.com/data/icons/artificial-intelligence-in-agriculture-line/128/Artificial_Intelligence_in_Agriculture_-_Line-03-512.png" alt="AI Report Analysis" width={40} height={40} loading="lazy" />,
   },
   {
     title: "Doctor Consultations",
     description:
       "Connect with specialized doctors through live video consultations and get personalized medical advice.",
-    icon: <img src="https://uxwing.com/wp-content/themes/uxwing/download/medical-science-lab/online-doctor-consultation-icon.svg" alt="Doctor Consultations" width={32} height={32} loading="lazy" />,
+    icon: <img src="https://uxwing.com/wp-content/themes/uxwing/download/medical-science-lab/online-doctor-consultation-icon.svg" alt="Doctor Consultations" width={40} height={40} loading="lazy" />,
   },
 ]

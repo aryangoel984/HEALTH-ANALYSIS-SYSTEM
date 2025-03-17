@@ -30,7 +30,7 @@ export default function DashboardHeader() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container mx-auto flex h-16 items-center justify-between">
         <div className="flex items-center gap-2 font-bold text-xl text-primary">
           <Link href="/dashboard">
             <span className="flex items-center">
@@ -59,7 +59,7 @@ export default function DashboardHeader() {
           </Link>
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 justify-end">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="rounded-full">
@@ -104,4 +104,5 @@ export default function DashboardHeader() {
     </header>
   )
 }
+
 

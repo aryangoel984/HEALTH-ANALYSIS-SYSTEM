@@ -44,6 +44,7 @@ export default function ConsultationPrescription() {
   }
 
   return (
+    <div className ="flex justify-center">
     <div className="min-h-screen bg-background">
       <DashboardHeader />
 
@@ -271,6 +272,7 @@ export default function ConsultationPrescription() {
           </div>
         </div>
       </main>
+    </div>
     </div>
   )
 }

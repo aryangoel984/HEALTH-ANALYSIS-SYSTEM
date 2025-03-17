@@ -55,6 +55,7 @@ export default function LifestylePlan() {
   }
 
   return (
+    <div className="flex justify-center">
     <div className="min-h-screen bg-background">
       <DashboardHeader />
 
@@ -472,6 +473,7 @@ export default function LifestylePlan() {
           </div>
         </div>
       </main>
+    </div>
     </div>
   )
 }
