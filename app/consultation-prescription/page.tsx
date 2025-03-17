@@ -198,7 +198,11 @@ export default function ConsultationPrescription() {
               </CardHeader>
               <CardContent className="pt-6">
                 <div className="space-y-4">
+                <Button variant="outline" className="w-full mt-2" onClick={() => router.push("/view-health-products")}>
+                  View Recommended Health Products
+            </Button>
                   <div className="p-3 border rounded-lg">
+                    
                     <h4 className="font-medium mb-1">Next Appointment</h4>
                     <p>{prescriptionData.followUp.nextAppointment}</p>
                   </div>
@@ -269,6 +273,7 @@ export default function ConsultationPrescription() {
                 </div>
               </CardContent>
             </Card>
+            
           </div>
         </div>
       </main>

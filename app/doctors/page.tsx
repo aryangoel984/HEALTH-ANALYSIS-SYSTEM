@@ -196,7 +196,7 @@ function DoctorCard({ doctor, onSelect }: DoctorCardProps) {
         <div className="flex items-start gap-4">
           <div className="relative h-16 w-16 rounded-full overflow-hidden border-2 border-primary/20">
             <Image
-              src={doctor.image || "/placeholder.svg?height=64&width=64"}
+              src= '/product-images/doctor_image.jpg'
               alt={doctor.name}
               fill
               style={{ objectFit: "cover" }} // Use style for objectFit

@@ -279,6 +279,9 @@ export default function Prescription() {
                 <Button className="w-full" onClick={() => router.push("/lifestyle-plan")}>
                   Get Personalized Lifestyle Plan
                 </Button>
+                <Button variant="outline" className="w-full mt-2" onClick={() => router.push("/view-health-products")}>
+                  View Recommended Health Products
+                </Button>
               </CardFooter>
             </Card>
           </div>

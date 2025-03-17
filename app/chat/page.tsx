@@ -91,7 +91,7 @@ export default function ChatPage() {
       <div key={message.id} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
         <div className={`flex gap-3 max-w-[80%] ${message.role === "user" ? "flex-row-reverse" : ""}`}>
           <Avatar className="h-8 w-8">
-            <AvatarImage src={message.role === "assistant" ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4N_soUiGggkq4TxayU7O_echs7FO8ISMD5w&s" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4N_soUiGggkq4TxayU7O_echs7FO8ISMD5w&s"} alt={message.role} />
+            <AvatarImage src={message.role === "assistant" ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4N_soUiGggkq4TxayU7O_echs7FO8ISMD5w&s" : "https://www.svgrepo.com/download/192244/man-user.svg"} alt={message.role} />
             <AvatarFallback>{message.role === "assistant" ? "AI" : "You"}</AvatarFallback>
           </Avatar>
           <div className={`rounded-lg p-3 ${message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>
